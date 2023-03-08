@@ -245,6 +245,7 @@ public class fEditarUsuario extends javax.swing.JDialog {
 
     private void chbEditarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbEditarContraActionPerformed
         txtContra.setEnabled(chbEditarContra.isSelected());
+        chbEditarContra.setVisible(!chbEditarContra.isSelected());
     }//GEN-LAST:event_chbEditarContraActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

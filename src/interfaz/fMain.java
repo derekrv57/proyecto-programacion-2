@@ -6,7 +6,11 @@
 package interfaz;
 
 import datos.usuario;
-import interfaz.internalFrames.fPermisos;
+import interfaz.trabajador.fFinanciero;
+import interfaz.trabajador.fInventario;
+import interfaz.trabajador.fLista;
+import interfaz.trabajador.fPermisos;
+import interfaz.usuario.fBuscador;
 import javax.swing.JFrame;
 
 /**
@@ -23,6 +27,10 @@ public class fMain extends javax.swing.JFrame {
         this.usu = usu;
         cargarDataUsuario();
         mnuTrabajador.setVisible(usu.isTrabajador());
+        mnuAccionesUsuario.setVisible(usu.isTrabajador());
+        if (!usu.isTrabajador()) {
+            abrir(new fBuscador(true));
+        }
     }
     
     public fMain(usuario usu, boolean internal){
@@ -30,6 +38,11 @@ public class fMain extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.usu = usu;
         cargarDataUsuario();
+        mnuTrabajador.setVisible(usu.isTrabajador());
+        mnuAccionesUsuario.setVisible(usu.isTrabajador());
+        if (!usu.isTrabajador()) {
+            abrir(new fBuscador(true));
+        }
         if (internal) {
             this.setTitle(this.getTitle() + " [" + usu.getUsuario() + "]");
             this.setExtendedState(JFrame.NORMAL);
@@ -69,13 +82,21 @@ public class fMain extends javax.swing.JFrame {
         mnuUsuario = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         mnuEditar = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mnuNombreUsuario = new javax.swing.JMenuItem();
         mnuCorreo = new javax.swing.JMenuItem();
         mnuDireccion = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
         mnuCerrarSesion = new javax.swing.JMenuItem();
         mnuSalir = new javax.swing.JMenuItem();
         mnuTrabajador = new javax.swing.JMenu();
         mnuPermisos = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        mnuInventario = new javax.swing.JMenuItem();
+        mnuLista = new javax.swing.JMenuItem();
+        mnuFinanciero = new javax.swing.JMenuItem();
+        mnuAccionesUsuario = new javax.swing.JMenu();
+        mnuBuscador = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Proyecto Bicicletas");
@@ -92,6 +113,7 @@ public class fMain extends javax.swing.JFrame {
             }
         });
         jMenu1.add(mnuEditar);
+        jMenu1.add(jSeparator3);
 
         mnuNombreUsuario.setText("Usuario");
         mnuNombreUsuario.setEnabled(false);
@@ -106,6 +128,7 @@ public class fMain extends javax.swing.JFrame {
         jMenu1.add(mnuDireccion);
 
         mnuUsuario.add(jMenu1);
+        mnuUsuario.add(jSeparator2);
 
         mnuCerrarSesion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuCerrarSesion.setText("Cerrar Sesion");
@@ -136,8 +159,45 @@ public class fMain extends javax.swing.JFrame {
             }
         });
         mnuTrabajador.add(mnuPermisos);
+        mnuTrabajador.add(jSeparator1);
+
+        mnuInventario.setText("Inventario");
+        mnuInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuInventarioActionPerformed(evt);
+            }
+        });
+        mnuTrabajador.add(mnuInventario);
+
+        mnuLista.setText("Lista de alquiler");
+        mnuLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuListaActionPerformed(evt);
+            }
+        });
+        mnuTrabajador.add(mnuLista);
+
+        mnuFinanciero.setText("Análisis financiero");
+        mnuFinanciero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFinancieroActionPerformed(evt);
+            }
+        });
+        mnuTrabajador.add(mnuFinanciero);
 
         jMenuBar1.add(mnuTrabajador);
+
+        mnuAccionesUsuario.setText("Usuario");
+
+        mnuBuscador.setText("Buscador de bicicletas");
+        mnuBuscador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBuscadorActionPerformed(evt);
+            }
+        });
+        mnuAccionesUsuario.add(mnuBuscador);
+
+        jMenuBar1.add(mnuAccionesUsuario);
 
         setJMenuBar(jMenuBar1);
 
@@ -177,14 +237,38 @@ public class fMain extends javax.swing.JFrame {
         abrir(new fPermisos());
     }//GEN-LAST:event_mnuPermisosActionPerformed
 
+    private void mnuInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarioActionPerformed
+        abrir(new fInventario());
+    }//GEN-LAST:event_mnuInventarioActionPerformed
+
+    private void mnuListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuListaActionPerformed
+        abrir(new fLista());
+    }//GEN-LAST:event_mnuListaActionPerformed
+
+    private void mnuFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFinancieroActionPerformed
+        abrir(new fFinanciero());
+    }//GEN-LAST:event_mnuFinancieroActionPerformed
+
+    private void mnuBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBuscadorActionPerformed
+        abrir(new fBuscador());
+    }//GEN-LAST:event_mnuBuscadorActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JMenu mnuAccionesUsuario;
+    private javax.swing.JMenuItem mnuBuscador;
     private javax.swing.JMenuItem mnuCerrarSesion;
     private javax.swing.JMenuItem mnuCorreo;
     private javax.swing.JMenuItem mnuDireccion;
     private javax.swing.JMenuItem mnuEditar;
+    private javax.swing.JMenuItem mnuFinanciero;
+    private javax.swing.JMenuItem mnuInventario;
+    private javax.swing.JMenuItem mnuLista;
     private javax.swing.JMenuItem mnuNombreUsuario;
     private javax.swing.JMenuItem mnuPermisos;
     private javax.swing.JMenuItem mnuSalir;

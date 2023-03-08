@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/logica/config.java</file>
-            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/datos/md5.java</file>
-            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/datos/contra.java</file>
+            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/trabajador/fPermisos.java</file>
             <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/fLogin.java</file>
-            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/datos/usuario.java</file>
-            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/main.java</file>
-            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/fRegistro.java</file>
+            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/fEditarUsuario.java</file>
+            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/trabajador/fInventario.java</file>
+            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/trabajador/fLista.java</file>
+            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/usuario/fBuscador.java</file>
             <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/datos/archivo.java</file>
             <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/fMain.java</file>
+            <file>file:/home/derek/NetBeansProjects/proyecto-programacion-2/src/interfaz/trabajador/fFinanciero.java</file>
         </group>
     </open-files>
 </project-private>

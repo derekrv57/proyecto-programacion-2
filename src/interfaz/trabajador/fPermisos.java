@@ -2,14 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package interfaz.internalFrames;
+package interfaz.trabajador;
 
 import datos.usuario;
 import interfaz.fContra;
 import interfaz.fMain;
 import java.io.File;
 import java.io.FilenameFilter;
-import javax.swing.JFrame;
 import logica.admin;
 import logica.config;
 
@@ -134,9 +133,9 @@ public class fPermisos extends javax.swing.JInternalFrame {
                         usuario usu = new usuario();
                         if (usu.login(this, "admin", contra)) {
                             usu.eliminar(usuario);
+                            this.dispose();
                         }
                     }
-                    cargar();
                     break;
             }
         } catch (Exception e) {
