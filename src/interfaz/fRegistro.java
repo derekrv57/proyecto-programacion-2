@@ -177,6 +177,7 @@ public class fRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_lblLoginMouseClicked
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        txtUsuario.setText(txtUsuario.getText().toLowerCase());
         txtContra.requestFocus();
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
@@ -193,6 +194,7 @@ public class fRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        txtUsuario.setText(txtUsuario.getText().toLowerCase());
         String err = "";
         String usuario = txtUsuario.getText();
         String contra = txtContra.getText();

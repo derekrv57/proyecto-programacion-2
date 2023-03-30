@@ -74,6 +74,11 @@ public class fEditarUsuario extends javax.swing.JDialog {
 
         txtUsuario.setEditable(false);
         txtUsuario.setEnabled(false);
+        txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUsuarioMouseClicked(evt);
+            }
+        });
         txtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsuarioActionPerformed(evt);
@@ -270,6 +275,10 @@ public class fEditarUsuario extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_lblEliminarMouseClicked
+
+    private void txtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMouseClicked
+        JOptionPane.showMessageDialog(this, "No está permitido el cambio de nombre de usuario");
+    }//GEN-LAST:event_txtUsuarioMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrar;

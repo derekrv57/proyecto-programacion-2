@@ -4,17 +4,35 @@
  */
 package interfaz.trabajador;
 
+import datos.archivo;
+import datos.informe;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import logica.config;
+
 /**
  *
  * @author derek
  */
 public class fFinanciero extends javax.swing.JInternalFrame {
-
+    informe[] inf = new informe().getInforme();
+    long total = 0;
     /**
-     * Creates new form fFinanciero
+     * Creates new form fInforme
      */
     public fFinanciero() {
         initComponents();
+        int l = inf.length;
+        int pags = (int) Math.ceil(l / 100) + 1;
+        for (int i = 0; i < pags; i++) {
+            cmbPagina.addItem(String.valueOf(i + 1));
+        }
+        cmbPagina.setSelectedIndex(pags - 1);
+        for (int i = 0; i < inf.length; i++) {
+            total += inf[i].getTotal();
+        }
+        tblInforme.setValueAt(new config().moneda + total, 0, 6);
+        mostrar();
     }
 
     /**
@@ -26,27 +44,255 @@ public class fFinanciero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblInforme = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        cmbPagina = new javax.swing.JComboBox<>();
+        btnExportar = new javax.swing.JButton();
+
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Análisis financiero");
+        setTitle("Informe");
+
+        tblInforme.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Parqueo alquiler", "Parqueo devolucion", "Tipo", "Hora", "Total", "", "Total ganancias"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.Object.class, java.lang.Long.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblInforme);
+
+        jLabel1.setText("Página:");
+
+        cmbPagina.setFocusable(false);
+        cmbPagina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPaginaActionPerformed(evt);
+            }
+        });
+
+        btnExportar.setText("Exportar");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 934, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExportar)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExportar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmbPaginaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPaginaActionPerformed
+        mostrar();
+    }//GEN-LAST:event_cmbPaginaActionPerformed
+
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        int result = fileChooser.showSaveDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String f = fileChooser.getSelectedFile().toString();
+            if (!f.endsWith(".csv")) {
+                f+=".csv";
+            }
+            StringBuilder csv = new StringBuilder();
+            int l = inf.length;
+            String[][] datos = new String[l][6];
+            for (int i = 0; i < l; i++) {
+                datos[i][0] = inf[i].getParqueoAlquilado();
+                datos[i][1] = inf[i].getParqueoDevolver();
+                datos[i][2] = inf[i].getTipo();
+                datos[i][3] = inf[i].getHoraAlquiler();
+                datos[i][4] = new config().moneda + String.valueOf(inf[i].getTotal());
+                datos[i][5] = new config().moneda + String.valueOf(total);
+            }
+            for (int i = 1; i < l; i++) {
+                try {
+                    datos[i][5] = "";
+                } catch (Exception e) {
+                }
+            }
+            for (int i = 0; i < l; i++) {
+                for (int j = 0; j < 6; j++) {
+                    csv.append(datos[i][j]);
+                    if (j != 6 - 1) {
+                        csv.append(",");
+                    }
+                }
+                csv.append("\n");
+            }
+            new archivo(f).escribir("Parqueo alquiler,Parqueo devolucion,Tipo,Hora,Total,Total ganancias\n"+csv.toString());
+            JOptionPane.showMessageDialog(this, f + "\nGuardado");
+        }
+
+    }//GEN-LAST:event_btnExportarActionPerformed
+
+    void mostrar(){
+        int cant = cmbPagina.getSelectedIndex() * 100; 
+        
+        for (int i = 0; i < 100; i++) {
+            try {
+                tblInforme.setValueAt(inf[cant].getParqueoAlquilado(), i, 0);
+                tblInforme.setValueAt(inf[cant].getParqueoDevolver(), i, 1);
+                tblInforme.setValueAt(inf[cant].getTipo(), i, 2);
+                tblInforme.setValueAt(inf[cant].getHoraAlquiler(), i, 3);
+                tblInforme.setValueAt(String.valueOf(new config().moneda + inf[cant].getTotal()), i, 4);
+                cant++;
+            } catch (Exception e) {
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExportar;
+    private javax.swing.JComboBox<String> cmbPagina;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblInforme;
     // End of variables declaration//GEN-END:variables
 }

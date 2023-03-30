@@ -11,8 +11,10 @@ import java.io.File;
  * @author derek
  */
 public class config {
-  String dir = ".ProyectoBicicletas";
-  String[] subdirs = {"usuarios"};
+    double precioHora = 2500;
+    public String moneda = "₡";
+    String dir = ".ProyectoBicicletas";
+    String[] subdirs = {"usuarios", "bicicletas"};
 
     public config() {
         File f = new File(dir);
@@ -34,5 +36,11 @@ public class config {
     public String[] getSubdirs() {
         return subdirs;
     }
+
+    public double getPrecioHora() {
+        return precioHora;
+    }
   
+    
+    
 }

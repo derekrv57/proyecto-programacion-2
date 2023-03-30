@@ -124,6 +124,7 @@ public class fLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblRegistroMouseClicked
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        txtUsuario.setText(txtUsuario.getText().toLowerCase());
         txtContra.requestFocus();
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
@@ -132,6 +133,7 @@ public class fLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContraActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        txtUsuario.setText(txtUsuario.getText().toLowerCase());
         String err = "";
         String usuario = txtUsuario.getText();
         String contra = txtContra.getText();

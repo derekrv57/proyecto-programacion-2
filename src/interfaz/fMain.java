@@ -11,6 +11,7 @@ import interfaz.trabajador.fInventario;
 import interfaz.trabajador.fLista;
 import interfaz.trabajador.fPermisos;
 import interfaz.usuario.fBuscador;
+import interfaz.usuario.fDevolver;
 import javax.swing.JFrame;
 
 /**
@@ -29,7 +30,8 @@ public class fMain extends javax.swing.JFrame {
         mnuTrabajador.setVisible(usu.isTrabajador());
         mnuAccionesUsuario.setVisible(usu.isTrabajador());
         if (!usu.isTrabajador()) {
-            abrir(new fBuscador(true));
+            abrir(new fBuscador(true, usu));
+            abrir(new fDevolver(true, usu));
         }
     }
     
@@ -41,7 +43,8 @@ public class fMain extends javax.swing.JFrame {
         mnuTrabajador.setVisible(usu.isTrabajador());
         mnuAccionesUsuario.setVisible(usu.isTrabajador());
         if (!usu.isTrabajador()) {
-            abrir(new fBuscador(true));
+            abrir(new fBuscador(true, usu));
+            abrir(new fDevolver(true, usu));
         }
         if (internal) {
             this.setTitle(this.getTitle() + " [" + usu.getUsuario() + "]");
@@ -97,6 +100,7 @@ public class fMain extends javax.swing.JFrame {
         mnuFinanciero = new javax.swing.JMenuItem();
         mnuAccionesUsuario = new javax.swing.JMenu();
         mnuBuscador = new javax.swing.JMenuItem();
+        mnuDevolver = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Proyecto Bicicletas");
@@ -188,6 +192,14 @@ public class fMain extends javax.swing.JFrame {
         jMenuBar1.add(mnuTrabajador);
 
         mnuAccionesUsuario.setText("Usuario");
+        mnuAccionesUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                mnuAccionesUsuarioMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mnuAccionesUsuarioMousePressed(evt);
+            }
+        });
 
         mnuBuscador.setText("Buscador de bicicletas");
         mnuBuscador.addActionListener(new java.awt.event.ActionListener() {
@@ -196,6 +208,14 @@ public class fMain extends javax.swing.JFrame {
             }
         });
         mnuAccionesUsuario.add(mnuBuscador);
+
+        mnuDevolver.setText("Devolver bicicletas");
+        mnuDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuDevolverActionPerformed(evt);
+            }
+        });
+        mnuAccionesUsuario.add(mnuDevolver);
 
         jMenuBar1.add(mnuAccionesUsuario);
 
@@ -250,8 +270,20 @@ public class fMain extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuFinancieroActionPerformed
 
     private void mnuBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBuscadorActionPerformed
-        abrir(new fBuscador());
+        abrir(new fBuscador(usu));
     }//GEN-LAST:event_mnuBuscadorActionPerformed
+
+    private void mnuDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDevolverActionPerformed
+        abrir(new fDevolver(usu));
+    }//GEN-LAST:event_mnuDevolverActionPerformed
+
+    private void mnuAccionesUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAccionesUsuarioMousePressed
+        
+    }//GEN-LAST:event_mnuAccionesUsuarioMousePressed
+
+    private void mnuAccionesUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuAccionesUsuarioMouseEntered
+        mnuDevolver.setVisible(usu.getAlquileres().length > 0);
+    }//GEN-LAST:event_mnuAccionesUsuarioMouseEntered
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
@@ -264,6 +296,7 @@ public class fMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuBuscador;
     private javax.swing.JMenuItem mnuCerrarSesion;
     private javax.swing.JMenuItem mnuCorreo;
+    private javax.swing.JMenuItem mnuDevolver;
     private javax.swing.JMenuItem mnuDireccion;
     private javax.swing.JMenuItem mnuEditar;
     private javax.swing.JMenuItem mnuFinanciero;

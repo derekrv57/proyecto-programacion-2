@@ -52,4 +52,21 @@ public class archivo {
             e.printStackTrace();
         }
     }
+    
+    public String[] listarArchivosEnDirectorio() {
+        String[] nombresArchivos = null;
+        if (archivo.isDirectory()) {
+            File[] archivos = archivo.listFiles();
+            nombresArchivos = new String[archivos.length];
+            int i = 0;
+            for (File archivo : archivos) {
+                if (archivo.isFile()) {
+                    nombresArchivos[i] = this.archivo + "/" + archivo.getName();
+                    i++;
+                }
+            }
+        }
+        return nombresArchivos;
+    }
+    
 }

@@ -122,4 +122,32 @@ public class usuario {
             return false;
         }
     }
+    
+    public bicicleta[] getAlquileres(){
+        bicicleta[] bicis;
+        String[] archivos = new archivo(new config().getDir() + "/" + "bicicletas").listarArchivosEnDirectorio();
+        int l = archivos.length;
+        int cant = 0;
+        for (int i = 0; i < l; i++) {
+            try {
+                if (new bicicleta(archivos[i]).getUsuario().equals(usuario)) {
+                    cant++;
+                }
+            } catch (Exception e) {
+            }
+        }
+        bicis = new bicicleta[cant];
+        cant = 0;
+        for (int i = 0; i < l; i++) {
+            bicicleta b = new bicicleta(archivos[i]);
+            try {
+                if (b.getUsuario().equals(usuario)) {
+                    bicis[cant] = b;
+                    cant++;
+                }
+            } catch (Exception e) {
+            }
+        }
+        return bicis;
+    }
 }
