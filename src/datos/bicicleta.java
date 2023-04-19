@@ -31,7 +31,7 @@ public class bicicleta {
     public bicicleta(String f) {
         try {
             String[] config = new archivo(f).leer();
-            id = Integer.parseInt(f.replace(new config().getDir() + "/" + "bicicletas/", ""));
+            id = Integer.parseInt(f.replace("\\", "/").replace(new config().getDir() + "/" + "bicicletas/", ""));
             parqueo = config[0];
             tipo = config[1];
             disponible = config[2].equals("") || config[2] == null;
@@ -92,16 +92,21 @@ public class bicicleta {
     public boolean devolver(String parqueo){
         if (!disponible) {
             disponible = true;
-            new archivo(new config().getDir() + "/" + "bicicletas/" + id).escribir(parqueo + "\n" + tipo);
+            new archivo(new config().getDir() + "/bicicletas/" + id).escribir(parqueo + "\n" + tipo);
         }
         return disponible;
     }
 
     public void guardar() {
-        new archivo(new config().getDir() + "/" + "bicicletas/" + id).escribir(parqueo + "\n" + tipo);
+        new archivo(new config().getDir() + "/bicicletas/" + id).escribir(parqueo + "\n" + tipo);
     }
 
     public void eliminar() {
-        new File(new config().getDir() + "/" + "bicicletas/" + id).delete();
+        try {
+            File f = new File(new config().getDir() + "/bicicletas/" + id);
+            f.delete();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

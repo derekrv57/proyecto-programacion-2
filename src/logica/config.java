@@ -12,7 +12,7 @@ import java.io.File;
  * @author derek
  */
 public class config {
-    double precioHora;
+    public double precioHora;
     public String moneda;
     String dir = ".ProyectoBicicletas";
     String[] subdirs = {"usuarios", "bicicletas", "parqueos"};

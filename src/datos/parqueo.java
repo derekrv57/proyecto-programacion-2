@@ -20,7 +20,7 @@ public class parqueo {
     public parqueo(String f) {
         try {
             String[] config = new archivo(f).leer();
-            this.nombre = f.replace(new config().getDir() + "/" + "parqueos/", "");
+            this.nombre = f.replace("\\", "/").replace(new config().getDir() + "/parqueos/", "");
             setEspacios(Integer.parseInt(config[0]));
         } catch (Exception e) {
         }
@@ -45,12 +45,12 @@ public class parqueo {
     }
     
     public void guardar(){
-        new archivo(new config().getDir() + "/" + "parqueos/" + nombre).escribir(String.valueOf(espacios));
+        new archivo(new config().getDir() + "/parqueos/" + nombre).escribir(String.valueOf(espacios));
     }
     
     public void eliminar(){
         try {
-            File f = new File(new config().getDir() + "/" + "parqueos/" + nombre);
+            File f = new File(new config().getDir() + "/parqueos/" + nombre);
             f.delete();
         } catch (Exception e) {
         }

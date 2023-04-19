@@ -33,6 +33,7 @@ public class archivo {
             while (br.ready()) {
                 line.add(br.readLine());
             }
+            br.close();
             return line.toArray(new String[0]);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(archivo.class.getName()).log(Level.SEVERE, null, ex);

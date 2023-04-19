@@ -9,6 +9,7 @@ import datos.bicicleta;
 import datos.informe;
 import datos.parqueo;
 import datos.usuario;
+import interfaz.fMain;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -21,7 +22,6 @@ import logica.config;
  * @author derek
  */
 public class fDevolver extends javax.swing.JInternalFrame {
-
     usuario usu;
     bicicleta[] bicis;
 
@@ -63,6 +63,7 @@ public class fDevolver extends javax.swing.JInternalFrame {
         setTitle("Devolver");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -188,11 +189,23 @@ public class fDevolver extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         mostrar();
+        btnDevolver.setEnabled(cmbParqueo.getItemCount() > 0);
+        if (cmbBicicleta.getItemCount() == 0) {
+            this.dispose();
+        }
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void cmbParqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbParqueoActionPerformed
-        // TODO add your handling code here:
+        tblDevolver.setValueAt(String.valueOf(cmbParqueo.getSelectedItem()), 2, 1);
     }//GEN-LAST:event_cmbParqueoActionPerformed
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        mostrar();
+        mostrarParqueos();
+        if (cmbBicicleta.getItemCount() == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_formInternalFrameActivated
 
     void mostrar() {
         bicis = usu.getAlquileres();
@@ -216,7 +229,7 @@ public class fDevolver extends javax.swing.JInternalFrame {
             tblDevolver.setValueAt(bicis[s].getTipo(), 3, 1);
             tblDevolver.setValueAt(bicis[s].getHora(), 4, 1);
             tblDevolver.setValueAt(String.valueOf(precio), 5, 1);
-            long total = minutosTranscurridos * precio;
+            long total = (minutosTranscurridos + 1) * precio;
             tblDevolver.setValueAt(new config().moneda + String.valueOf(total), 7, 1);
         } 
     }
@@ -244,14 +257,13 @@ public class fDevolver extends javax.swing.JInternalFrame {
         bicicleta[] bicicletas = new bicicleta[l];
         for (int i = 0; i < l; i++) {
             try {
-                bicicletas[i] = new bicicleta(archivos[i]);
+                bicicletas[i] = new bicicleta(archivos[i]);                
                 if (bicicletas[i].getParqueo().equals(p.getNombre()) && bicicletas[i].isDisponible()) {
                     espacios--;
                 }
             } catch (Exception e) {
             }
         }
-        btnDevolver.setEnabled(espacios > 0);
         if (espacios > 0) {
             cmbParqueo.addItem(p.getNombre());
         }

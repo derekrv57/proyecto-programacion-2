@@ -9,7 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import datos.archivo;
 import datos.bicicleta;
+import datos.parqueo;
 import datos.usuario;
+import interfaz.fMain;
 import javax.swing.JOptionPane;
 import logica.config;
 
@@ -20,16 +22,20 @@ import logica.config;
 public class fBuscador extends javax.swing.JInternalFrame {
     bicicleta[] bicicletas;
     usuario usu;
+    fMain partner;
+    int alquilados = 0;
+
     /**
      * Creates new form fBuscador
      */
-    public fBuscador(usuario usu) {
+    public fBuscador(usuario usu, fMain partner) {
         initComponents();
         mostrar(true, "");
         this.usu = usu;
+        this.partner = partner;
     }
     
-    public fBuscador(boolean usuario, usuario usu) {
+    public fBuscador(boolean usuario, usuario usu, fMain partner) {
         initComponents();
         usuario = !usuario;
         try {
@@ -43,6 +49,7 @@ public class fBuscador extends javax.swing.JInternalFrame {
         }
         mostrar(true, "");
         this.usu = usu;
+        this.partner = partner;
     }
 
     /**
@@ -66,6 +73,24 @@ public class fBuscador extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Buscador de bicicletas");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         tblBicis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -196,8 +221,8 @@ public class fBuscador extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblBicis);
         if (tblBicis.getColumnModel().getColumnCount() > 0) {
-            tblBicis.getColumnModel().getColumn(0).setMinWidth(64);
-            tblBicis.getColumnModel().getColumn(0).setPreferredWidth(64);
+            tblBicis.getColumnModel().getColumn(0).setMinWidth(128);
+            tblBicis.getColumnModel().getColumn(0).setPreferredWidth(128);
             tblBicis.getColumnModel().getColumn(0).setMaxWidth(256);
         }
 
@@ -265,6 +290,10 @@ public class fBuscador extends javax.swing.JInternalFrame {
     private void btnAlquilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlquilarActionPerformed
         if (bicicletas[tblBicis.getSelectedRow()].alquilar(usu)) {
             JOptionPane.showMessageDialog(this, "Alquilado");
+            if (alquilados == 0) {
+                partner.abrir(new fDevolver(true, usu));
+            }
+            alquilados ++;
         }
         else{
             JOptionPane.showMessageDialog(this, "Error al alquilar");
@@ -287,6 +316,21 @@ public class fBuscador extends javax.swing.JInternalFrame {
             btnAlquilar.setEnabled(false);
         }
     }//GEN-LAST:event_tblBicisMouseReleased
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        String[] archivos = new archivo(new config().getDir() + "/" + "parqueos").listarArchivosEnDirectorio();
+        int l = archivos.length;
+        for (int i = 0; i < l; i++) {
+            try {
+                cmbParqueo.addItem(new parqueo(archivos[i]).getNombre());
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        mostrar(chbNoDisponibles.isSelected(), String.valueOf(cmbParqueo.getSelectedItem()).replace("Todos", ""));
+    }//GEN-LAST:event_formInternalFrameActivated
 
     
     void mostrar(boolean noDisponibles, String parqueo){

@@ -17,14 +17,13 @@ import logica.config;
 public class fInventario extends javax.swing.JInternalFrame {
 
     bicicleta[] bicicletas;
-    parqueo[] parqueos;
+    config cfg = new config();
 
     /**
      * Creates new form fInventario
      */
     public fInventario() {
         initComponents();
-        config cfg = new config();
         txtSimbolo.setText(cfg.moneda);
         txtMonto.setValue(cfg.getPrecioHora());
         mostrar();
@@ -55,6 +54,7 @@ public class fInventario extends javax.swing.JInternalFrame {
         btnBorrar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cmbTipo = new javax.swing.JComboBox<>();
+        btnGuardarCofig = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -134,6 +134,14 @@ public class fInventario extends javax.swing.JInternalFrame {
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicicleta", "Moto" }));
         cmbTipo.setFocusable(false);
 
+        btnGuardarCofig.setText("Guardar");
+        btnGuardarCofig.setFocusable(false);
+        btnGuardarCofig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarCofigActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,7 +157,9 @@ public class fInventario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMonto))
+                        .addComponent(txtMonto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGuardarCofig))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,7 +192,8 @@ public class fInventario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtSimbolo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarCofig))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -211,9 +222,12 @@ public class fInventario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        bicicleta b = bicicletas[cmbId.getSelectedIndex()];
-        b = new bicicleta(Integer.parseInt(cmbId.getSelectedItem().toString()), cmbParqueo.getSelectedItem().toString(), b.isDisponible(), cmbTipo.getSelectedItem().toString());
-        b.guardar();
+        try {
+            bicicleta b = bicicletas[cmbId.getSelectedIndex()];
+            b = new bicicleta(Integer.parseInt(cmbId.getSelectedItem().toString()), cmbParqueo.getSelectedItem().toString(), b.isDisponible(), cmbTipo.getSelectedItem().toString());
+            b.guardar();
+        } catch (Exception e) {
+        }
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -259,6 +273,13 @@ public class fInventario extends javax.swing.JInternalFrame {
             mostrar();
         }
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnGuardarCofigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCofigActionPerformed
+        cfg.moneda = txtSimbolo.getText();
+        cfg.precioHora = Double.parseDouble(String.valueOf(txtMonto.getValue()));
+        cfg.guardar();
+        JOptionPane.showMessageDialog(this, "Configuración guardada");
+    }//GEN-LAST:event_btnGuardarCofigActionPerformed
 
     void mostrar() {
         cmbParqueo.removeAllItems();
@@ -315,6 +336,7 @@ public class fInventario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAplicar;
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardarCofig;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> cmbId;
     private javax.swing.JComboBox<String> cmbParqueo;

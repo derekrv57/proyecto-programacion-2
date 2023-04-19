@@ -31,7 +31,7 @@ public class fMain extends javax.swing.JFrame {
         mnuTrabajador.setVisible(usu.isTrabajador());
         mnuAccionesUsuario.setVisible(usu.isTrabajador());
         if (!usu.isTrabajador()) {
-            abrir(new fBuscador(true, usu));
+            abrir(new fBuscador(true, usu, this));
             abrir(new fDevolver(true, usu));
         }
     }
@@ -44,7 +44,7 @@ public class fMain extends javax.swing.JFrame {
         mnuTrabajador.setVisible(usu.isTrabajador());
         mnuAccionesUsuario.setVisible(usu.isTrabajador());
         if (!usu.isTrabajador()) {
-            abrir(new fBuscador(true, usu));
+            abrir(new fBuscador(true, usu, this));
             abrir(new fDevolver(true, usu));
         }
         if (internal) {
@@ -66,7 +66,7 @@ public class fMain extends javax.swing.JFrame {
         mnuDireccion.setText("Direccion: " + usu.getDireccion().replace("\n", "  "));
     }
 
-    void abrir(javax.swing.JInternalFrame frm){
+    public void abrir(javax.swing.JInternalFrame frm){
         desktop.add(frm);
         frm.toFront();
         frm.setVisible(true);
@@ -282,7 +282,7 @@ public class fMain extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuFinancieroActionPerformed
 
     private void mnuBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBuscadorActionPerformed
-        abrir(new fBuscador(usu));
+        abrir(new fBuscador(usu, this));
     }//GEN-LAST:event_mnuBuscadorActionPerformed
 
     private void mnuDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDevolverActionPerformed
