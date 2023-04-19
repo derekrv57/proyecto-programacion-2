@@ -4,6 +4,7 @@
  */
 package logica;
 
+import datos.archivo;
 import java.io.File;
 
 /**
@@ -11,8 +12,8 @@ import java.io.File;
  * @author derek
  */
 public class config {
-    double precioHora = 2500;
-    public String moneda = "₡";
+    double precioHora;
+    public String moneda;
     String dir = ".ProyectoBicicletas";
     String[] subdirs = {"usuarios", "bicicletas", "parqueos"};
 
@@ -27,6 +28,13 @@ public class config {
                 f.mkdir();
             }
         }
+        f = new File(dir + "/config");
+        if (!f.exists()) {
+            new archivo(dir + "/config").escribir("₡\n2500");
+        }
+        String[] a = new archivo(dir + "/config").leer();
+        moneda = a[0];
+        precioHora = Double.parseDouble(a[1]);
     }
 
     public String getDir() {
@@ -41,6 +49,9 @@ public class config {
         return precioHora;
     }
   
+    public void guardar(){
+        new archivo(dir + "/config").escribir(moneda + "\n" + String.valueOf(precioHora));
+    }
     
     
 }

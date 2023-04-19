@@ -4,6 +4,7 @@
  */
 package datos;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import logica.config;
@@ -94,5 +95,13 @@ public class bicicleta {
             new archivo(new config().getDir() + "/" + "bicicletas/" + id).escribir(parqueo + "\n" + tipo);
         }
         return disponible;
+    }
+
+    public void guardar() {
+        new archivo(new config().getDir() + "/" + "bicicletas/" + id).escribir(parqueo + "\n" + tipo);
+    }
+
+    public void eliminar() {
+        new File(new config().getDir() + "/" + "bicicletas/" + id).delete();
     }
 }

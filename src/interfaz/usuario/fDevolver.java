@@ -80,6 +80,11 @@ public class fDevolver extends javax.swing.JInternalFrame {
         });
 
         cmbParqueo.setFocusable(false);
+        cmbParqueo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbParqueoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Parqueo:");
 
@@ -184,6 +189,10 @@ public class fDevolver extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         mostrar();
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void cmbParqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbParqueoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbParqueoActionPerformed
 
     void mostrar() {
         bicis = usu.getAlquileres();
