@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 ec3c8d1ffd881b2c93158fe0e5db2395d00c2cdf Derek Rodríguez <derekrv57@gmail.com> 1677112360 -0600	commit (initial): Main
+ec3c8d1ffd881b2c93158fe0e5db2395d00c2cdf bcf52c149058fca6007ab93dcf174c907ceb54af Derek Rodríguez <derekrv57@gmail.com> 1677569607 -0600	commit: Modulo login, registro (trabajador y usuario)
+bcf52c149058fca6007ab93dcf174c907ceb54af fdedd9bc0e4ac6e948e0a4a7ac109db54670a799 Derek Rodríguez <derekrv57@gmail.com> 1678234273 -0600	commit: Primer avance
+fdedd9bc0e4ac6e948e0a4a7ac109db54670a799 a73e817609d22a555e56c32210ba5af92bb63f02 Derek Rodríguez <derekrv57@gmail.com> 1678851232 -0600	pull --ff --recurse-submodules --progress origin: Fast-forward
+a73e817609d22a555e56c32210ba5af92bb63f02 1f512eb2b4389540127d41ae067a204514aed821 Derek Rodríguez <derekrv57@gmail.com> 1680151893 -0600	commit: Avance 2
