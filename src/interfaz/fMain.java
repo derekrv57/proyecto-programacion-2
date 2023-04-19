@@ -9,6 +9,7 @@ import datos.usuario;
 import interfaz.trabajador.fFinanciero;
 import interfaz.trabajador.fInventario;
 import interfaz.trabajador.fLista;
+import interfaz.trabajador.fParqueo;
 import interfaz.trabajador.fPermisos;
 import interfaz.usuario.fBuscador;
 import interfaz.usuario.fDevolver;
@@ -98,6 +99,8 @@ public class fMain extends javax.swing.JFrame {
         mnuInventario = new javax.swing.JMenuItem();
         mnuLista = new javax.swing.JMenuItem();
         mnuFinanciero = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        mnuParqueo = new javax.swing.JMenuItem();
         mnuAccionesUsuario = new javax.swing.JMenu();
         mnuBuscador = new javax.swing.JMenuItem();
         mnuDevolver = new javax.swing.JMenuItem();
@@ -188,6 +191,15 @@ public class fMain extends javax.swing.JFrame {
             }
         });
         mnuTrabajador.add(mnuFinanciero);
+        mnuTrabajador.add(jSeparator4);
+
+        mnuParqueo.setText("Modificar parqueos");
+        mnuParqueo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuParqueoActionPerformed(evt);
+            }
+        });
+        mnuTrabajador.add(mnuParqueo);
 
         jMenuBar1.add(mnuTrabajador);
 
@@ -285,6 +297,10 @@ public class fMain extends javax.swing.JFrame {
         mnuDevolver.setVisible(usu.getAlquileres().length > 0);
     }//GEN-LAST:event_mnuAccionesUsuarioMouseEntered
 
+    private void mnuParqueoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuParqueoActionPerformed
+        abrir(new fParqueo());
+    }//GEN-LAST:event_mnuParqueoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
@@ -292,6 +308,7 @@ public class fMain extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JMenu mnuAccionesUsuario;
     private javax.swing.JMenuItem mnuBuscador;
     private javax.swing.JMenuItem mnuCerrarSesion;
@@ -303,6 +320,7 @@ public class fMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuInventario;
     private javax.swing.JMenuItem mnuLista;
     private javax.swing.JMenuItem mnuNombreUsuario;
+    private javax.swing.JMenuItem mnuParqueo;
     private javax.swing.JMenuItem mnuPermisos;
     private javax.swing.JMenuItem mnuSalir;
     private javax.swing.JMenu mnuTrabajador;

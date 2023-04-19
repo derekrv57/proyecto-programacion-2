@@ -7,12 +7,12 @@ package interfaz.usuario;
 import datos.archivo;
 import datos.bicicleta;
 import datos.informe;
+import datos.parqueo;
 import datos.usuario;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Timer;
-import java.util.TimerTask;
+
 import javax.swing.JOptionPane;
 import logica.config;
 
@@ -31,6 +31,7 @@ public class fDevolver extends javax.swing.JInternalFrame {
     public fDevolver(usuario usu) {
         initComponents();
         this.usu = usu;
+        mostrarParqueos();
     }
 
     public fDevolver(boolean usuario, usuario usu) {
@@ -38,6 +39,7 @@ public class fDevolver extends javax.swing.JInternalFrame {
         usuario = !usuario;
         this.setClosable(usuario);
         this.usu = usu;
+        mostrarParqueos();
     }
 
     /**
@@ -51,8 +53,6 @@ public class fDevolver extends javax.swing.JInternalFrame {
 
         cmbParqueo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        lblEspacios = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDevolver = new javax.swing.JTable();
         btnDevolver = new javax.swing.JButton();
@@ -82,10 +82,6 @@ public class fDevolver extends javax.swing.JInternalFrame {
         cmbParqueo.setFocusable(false);
 
         jLabel1.setText("Parqueo:");
-
-        jLabel2.setText("Espacios disponibles:");
-
-        lblEspacios.setText("0");
 
         tblDevolver.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,10 +133,6 @@ public class fDevolver extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbParqueo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblEspacios)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDevolver))
                     .addGroup(layout.createSequentialGroup()
@@ -159,9 +151,7 @@ public class fDevolver extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cmbParqueo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(lblEspacios))
+                        .addComponent(jLabel1))
                     .addComponent(btnDevolver, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -171,7 +161,7 @@ public class fDevolver extends javax.swing.JInternalFrame {
 
     private void btnDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolverActionPerformed
         if (new informe(String.valueOf(tblDevolver.getValueAt(1, 1)), String.valueOf(tblDevolver.getValueAt(2, 1)), String.valueOf(tblDevolver.getValueAt(3, 1)), String.valueOf(tblDevolver.getValueAt(4, 1)), Long.parseLong(String.valueOf(tblDevolver.getValueAt(7, 1)).replace(new config().moneda, ""))).generar()) {
-            if (bicis[cmbBicicleta.getSelectedIndex()].devolver()) {
+            if (bicis[cmbBicicleta.getSelectedIndex()].devolver(String.valueOf(cmbParqueo.getSelectedItem()))) {
                 JOptionPane.showMessageDialog(this, "Devuelto");
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo devolver");
@@ -181,6 +171,10 @@ public class fDevolver extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No se pudo devolver\nError al generar el informe");
         }
         mostrar();
+        mostrarParqueos();
+        if (cmbBicicleta.getItemCount() == 0) {
+            this.dispose();
+        }
     }//GEN-LAST:event_btnDevolverActionPerformed
 
     private void cmbBicicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBicicletaActionPerformed
@@ -215,19 +209,51 @@ public class fDevolver extends javax.swing.JInternalFrame {
             tblDevolver.setValueAt(String.valueOf(precio), 5, 1);
             long total = minutosTranscurridos * precio;
             tblDevolver.setValueAt(new config().moneda + String.valueOf(total), 7, 1);
-        } else {
-            this.dispose();
-        }
+        } 
     }
 
+    void mostrarParqueos(){
+        cmbParqueo.removeAllItems();
+        try {
+            String[] archivos = new archivo(new config().getDir() + "/" + "parqueos").listarArchivosEnDirectorio();
+            int l = archivos.length;
+            parqueo[] parqueos = new parqueo[l];
+            for (int i = 0; i < l; i++) {
+                try {
+                    parqueos[i] = new parqueo(archivos[i]);
+                    mostrarParqueosDisponibles(parqueos[i], parqueos[0].getEspacios());
+                } catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    void mostrarParqueosDisponibles(parqueo p, int espacios){
+        String[] archivos = new archivo(new config().getDir() + "/" + "bicicletas").listarArchivosEnDirectorio();
+        int l = archivos.length;
+        bicicleta[] bicicletas = new bicicleta[l];
+        for (int i = 0; i < l; i++) {
+            try {
+                bicicletas[i] = new bicicleta(archivos[i]);
+                if (bicicletas[i].getParqueo().equals(p.getNombre()) && bicicletas[i].isDisponible()) {
+                    espacios--;
+                }
+            } catch (Exception e) {
+            }
+        }
+        btnDevolver.setEnabled(espacios > 0);
+        if (espacios > 0) {
+            cmbParqueo.addItem(p.getNombre());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDevolver;
     private javax.swing.JComboBox<String> cmbBicicleta;
     private javax.swing.JComboBox<String> cmbParqueo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblEspacios;
     private javax.swing.JTable tblDevolver;
     // End of variables declaration//GEN-END:variables
 

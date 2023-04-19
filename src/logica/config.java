@@ -14,7 +14,7 @@ public class config {
     double precioHora = 2500;
     public String moneda = "₡";
     String dir = ".ProyectoBicicletas";
-    String[] subdirs = {"usuarios", "bicicletas"};
+    String[] subdirs = {"usuarios", "bicicletas", "parqueos"};
 
     public config() {
         File f = new File(dir);

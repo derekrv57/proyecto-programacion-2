@@ -4,10 +4,8 @@
  */
 package datos;
 
-import interfaz.usuario.fDevolver;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.JOptionPane;
 import logica.config;
 
 /**
@@ -90,7 +88,7 @@ public class bicicleta {
         return !disponible;
     }
     
-    public boolean devolver(){
+    public boolean devolver(String parqueo){
         if (!disponible) {
             disponible = true;
             new archivo(new config().getDir() + "/" + "bicicletas/" + id).escribir(parqueo + "\n" + tipo);
